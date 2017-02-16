@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content%} {% with fmessages = get_flashed_messages() %} {% if fmessages %} {% for message in fmessages %}
+<p>{{ message }}</p>
+{% endfor %} {% endif %} {% endwith %} {% if current_user.id == user.id %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3" id="userside">
+            <h5 class="text-left"><b>{{user.first_name}} {{user.last_name}}</b> | <a href="/users/{{user.id}}/edit"><span class="glyphicon glyphicon-pencil"></span></a><br>username: {{user.username}}<br>email: {{user.email}}<br></h5>
+            <br><img src="{{user.image_url}}" class="userimages" align="left">
+            <br>
+            <br>
+        </div>
+        <div class="col-xs-9 pull-right" id="messagefield">
+            <h3><b>Messages</b><a href="/users/{{user.id}}/messages/new"><b> +</b></a></h3>
+            <br> {% for message in messages %}
+            <h5 class="text-left">MESSAGE #{{message.id}} |  <a href="/users/{{user.id}}/messages/{{message.id}}/edit"><span class="glyphicon glyphicon-pencil"></span></a></h5>
+            <h3 class="text-left">{{message.message}}</h3>
+            <br> {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-3" id="userside">
+            <h5 class="text-left"><b>{{user.first_name}} {{user.last_name}}</b><br>username: {{user.username}}<br>email: {{user.email}}<br></h5>
+            <br><img src="{{user.image_url}}" class="userimages" align="left"></div>
+        <div class="col-xs-9 pull-right" id="messagefield">
+            <h3><b>Messages</b></h3>
+            <br> {% for message in messages %}
+            <h5 class="text-left">MESSAGE #{{message.id}}</h5>
+            <h3 class="text-left">  {{message.message}}</h3>
+            <br> {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %} {% endblock %}

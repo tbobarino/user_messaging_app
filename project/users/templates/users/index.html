@@ -1,0 +1,22 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<!-- {% with messages = get_flashed_messages() %}
+  {% if messages %} -->
+    {% for message in get_flashed_messages() %}
+      <p>{{ message }}</p>
+    {% endfor %}
+<!--   {% endif %}
+{% endwith %} -->
+
+<div class="container">
+    <div class="row">
+        {% for user in users %}
+        <div class="col-md-3 col-xs-4 text-left">
+            <h5><b><a href="/users/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></b><br>username: {{user.username}}<br>email: {{user.email}}<br><br><img src="{{user.image_url}}" class="userimages"><br></h5></div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

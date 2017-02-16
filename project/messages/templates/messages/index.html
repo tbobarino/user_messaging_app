@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+{% with fmessages = get_flashed_messages() %}
+  {% if fmessages %}
+    {% for message in fmessages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<a href="/users/{{user.id}}/messages/new"><b>ADD NEW MESSAGE</b></a><br><br>
+<div class="container">
+    <div class="row">
+        {% for message in messages %}
+        <div class="col-md-12 col-xs-12">
+            <h5><a href="/users/{{user.id}}/messages/{{message.id}}">Message #{{message.id}}</a> |  <a href="/users/{{user.id}}/messages/{{message.id}}/edit"><span class="glyphicon glyphicon-pencil"></span></a></h5><h3>{{message.message}}</h3><br></div>
+        {% endfor %}
+    </div>
+</div>
+
+<br><h5><b><a href="/users/{{user.id}}">BACK TO USER</a></b></h5>
+
+
+{% endblock %}

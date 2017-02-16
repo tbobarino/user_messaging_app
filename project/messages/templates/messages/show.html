@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content%}
+<h3><a href="/users/{{user.id}}/messages/{{message.id}}/edit"><span class="glyphicon glyphicon-pencil"></span></a><br>
+{{message.message}}</h3>
+
+<form action="{{ url_for('messages.show', id=message.id, user_id=message.user_id)}}?_method=DELETE" method="POST">
+    <button type="submit" class="btn btn-primary" onclick="return confirm('Delete?')"><span class="glyphicon glyphicon-remove"></span></button>
+</form>
+
+<br><h5><b><a href="/users/{{user.id}}">BACK TO USER PAGE</a></b></h5>
+{% endblock %}

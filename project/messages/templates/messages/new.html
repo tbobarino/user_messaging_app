@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content%} 
+	<form action="{{ url_for('messages.index', user_id=user.id) }}" method="POST">
+	{{ form.csrf_token }}
+	{% for field in form if field.widget.input_type != 'hidden' %}
+	<div class="form-group row">
+    {{ field.label }}  
+    <div class="col-10">
+    {{ field (size = "60")}}
+    </div></div>
+    <button type="submit">Submit</button>
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <br><br><p><font color="red">{{ error }}</font></p>
+        {% endfor %}
+      {% endif %}
+	{% endfor %}
+	</form>
+	</div></div>
+	<br><h5><b><a href="/users/{{user.id}}">BACK TO USER PAGE</a></b></h5>
+{% endblock %}

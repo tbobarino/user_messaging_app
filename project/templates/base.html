@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Twitster</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/simplex/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="jumbotron">
+        <a href="/users"><img src="https://s2.postimg.org/btsvg5r6h/loggo.jpg" id="logo"></a>
+    </div>
+    <div class="container"> 
+    {% if current_user.is_authenticated %}
+    <div class="addnew"><b><a href="{{url_for('users.logout')}}">LOGOUT</a> | <a href="{{url_for('users.index')}}">HOME</a></b></div>
+    {% else %}
+    <div class="addnew"><b><a href="{{url_for('users.login')}}">LOGIN</a> | <a href="{{url_for('users.new')}}">SIGN UP</b></a></div>
+    {% endif %}
+    </div>
+    <br>
+    <br> {% block content%}{% endblock %}
+    <!-- <script src="{{ url_for('static', filename='styles/dist/js/bootstrap.js') }}"></script> -->
+</body>
+
+</html>

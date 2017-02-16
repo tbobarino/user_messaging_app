@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content%} 
+  {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+      {% endfor %}
+	<form action="{{url_for('users.new')}}" method="POST">
+	{{ form.csrf_token }}
+	{% for field in form if field.widget.input_type != 'hidden' %}
+	<div class="form-group row">
+    {{ field.label }}  
+    <div class="col-10">
+    {{ field }}
+    </div></div>
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <font color="red">{{ error }}</font>
+        {% endfor %}
+      {% endif %}
+	{% endfor %}
+	<button type="submit">Sign Up</button>
+	</form>
+{% endblock %}

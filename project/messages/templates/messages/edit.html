@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content%}
+<form action="{{url_for('messages.show', id=message.id, user_id=message.user_id)}}?_method=PATCH" method="POST">
+	{{ form.csrf_token }}
+	{% for field in form if field.widget.input_type != 'hidden' %}
+  <div class="form-group row">
+    {{ field.label }}
+    <div class="col-10">
+    {{ field (size = "60")}}
+    </div></div>
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <font color="red">{{ error }}</font>
+        {% endfor %}
+      {% endif %}
+	{% endfor %}
+	<button type="submit">Update</button>
+	</form>
+  <br>
+  <form action="{{ url_for('messages.show', id=message.id, user_id=message.user_id)}}?_method=DELETE" method="POST">
+    <button type="submit" class="btn btn-primary" onclick="return confirm('Delete?')"><span class="glyphicon glyphicon-remove"></span></button>
+</form>
+
+  <br><h5><b><a href="/users/{{user.id}}">BACK TO USER PAGE</a></b></h5>
+{% endblock %}
